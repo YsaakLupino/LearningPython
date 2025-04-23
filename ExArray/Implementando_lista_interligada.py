@@ -1,6 +1,6 @@
 class organizada:
     def __init__(self):
-        self.inicio = None #Head
+        self.head = None #Head
     
     class no:
         def __init__(self,atual):
@@ -8,21 +8,21 @@ class organizada:
             self.proximo = None
     
     #Funções:
-    def addend(self, atual): # Adicionar nó ao final da lista
-        dado = organizada.no(atual) 
-        if self.inicio != None:
-            temp = self.inicio
+    def addend(self, dado): # Adicionar nó ao final da lista
+        dado = organizada.no(dado) 
+        if self.head != None:
+            temp = self.head
             while temp.proximo != None:
                 temp = temp.proximo
             temp.proximo = dado
             return
             
-        self.inicio = dado
+        self.head = dado
 
     
     def exibir(self): # Exibir sua lista
-        temp = self.inicio
-        if self.inicio == None:
+        temp = self.head
+        if self.head == None:
             raise IndexError('Lista vazia') 
         print('[', end='') # Parte visual para parecer uma lista de python
         while temp.proximo != None:
@@ -30,40 +30,40 @@ class organizada:
             temp = temp.proximo
         print(f'{temp.atual}]')
     
-    def addini(self, atual): #adicionar nó no inicio
-        dado = organizada.no(atual)
-        temp = self.inicio
-        self.inicio = dado
-        self.inicio.proximo = temp # não necessita de if lista vazia
+    def addini(self, dado): #adicionar nó antes do head
+        dado = organizada.no(dado)
+        temp = self.head
+        self.head = dado
+        self.head.proximo = temp # não necessita de if lista vazia
         
     def removini(self): #Remover primeiro nó
-        if self.inicio == None:
+        if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.inicio.proximo
-        self.inicio = temp
+        temp = self.head.proximo
+        self.head = temp
     
     def removend(self): #Remover ultimo nó
-        if self.inicio == None:
+        if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.inicio
+        temp = self.head
         while temp.proximo.proximo != None:
             temp = temp.proximo
         print(temp.atual)
         temp.proximo = None
 
-    def removeval(self, n): # Remover nó por seu valor atual
-        if self.inicio == None:
+    def removeval(self, valor): # Remover nó por seu valor atual
+        if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.inicio
+        temp = self.head
         while True:
-            if temp.atual == n:
-                self.inicio = temp.proximo
+            if temp.atual == valor:
+                self.head = temp.proximo
                 break
             temp2 = temp # Guardando temp anterior ao do valor a ser removido para atualizar seu proximo depois
             temp = temp.proximo
             while True:
                 try: # Tratando erro caso nao exista o valor na lista
-                    if temp.atual == n:
+                    if temp.atual == valor:
                         temp = temp.proximo
                         temp2.proximo = temp
                         break
@@ -73,18 +73,18 @@ class organizada:
                     break # Simplesmente nao acontece nada caso o elemento nao exista na lista
             break
     
-    def removepstn(self, p):
-        temp = self.inicio
+    def removepstn(self, pstn):
+        temp = self.head
         cont = 0
-        if p == cont: #caso o primeiro no ja o procurado
-            self.inicio = temp.proximo 
+        if pstn == cont: #caso o primeiro no ja o procurado
+            self.head = temp.proximo 
             return
         temp2 = temp
         temp = temp.proximo
         cont += 1
         try: # Tratando erro caso posição nao exista! 
             while True:
-                if p == cont:
+                if pstn == cont:
                     temp = temp.proximo
                     temp2.proximo = temp
                     break

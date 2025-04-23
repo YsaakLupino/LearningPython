@@ -85,33 +85,37 @@ class Organizada:
             
     
     def remove_pos(self, pstn):
-        if pstn < 0: # Caso a pstn seja menor que 0 ele remove de frente para trás!
-            node_pointer = self.head
-            cont = 1
-            while node_pointer.proximo != None:
-                node_pointer = node_pointer.proximo
-                cont += 1
-            pstn = cont + pstn
+        if self.head == None:
+            raise IndexError('Lista Vazia')
         node_pointer = self.head
         cont = 0
-        if pstn == cont: #caso o primeiro no ja o procurado
-            self.head = node_pointer.proximo 
-            self.len -= 1
-            return
-        node_pointer2 = node_pointer
-        node_pointer = node_pointer.proximo
+        if pstn < 0:
+            pstn = self.len + pstn
+        if pstn == cont: # se o primeiro ja for 
+            self.head = self.head.proximo
+            return    
+        try:
+            node_pointer_ant = node_pointer
+            node_pointer = node_pointer.proximo
+        except:
+            raise IndexError('Posição não encontrada')
         cont += 1
-        try: # Tratando erro caso posição nao exista!
-            while True: 
+        try:
+            while True:
                 if pstn == cont:
-                    node_pointer2.proximo = None
-                    self.len -= 1
+                    node_pointer = node_pointer.proximo
+                    node_pointer_ant.proximo = node_pointer
                     return
-                node_pointer2 = node_pointer
+                if cont > self.len:
+                    raise IndexError('Posição não encontrada')
+                node_pointer_ant = node_pointer
                 node_pointer = node_pointer.proximo
-                cont += 1     
-        except AttributeError:
-            return # Nada acontece caso a posição não exista!
+                cont += 1
+        except:
+            raise IndexError('Posição não encontrada')
+         # se o parametro passado para pstn for negativo
+        
+
 
     def count(self):
         return self.len
@@ -129,13 +133,13 @@ Adicionar parametro de posição 1 2 3.. ao removini e removend
 lista = Organizada()
 lista.add_end(1)
 lista.add_end(2)
-lista.add_end(2)
-lista.add_end(2)
-lista.add_end(2)
-lista.add_end(2)
-lista.remov_end()
-lista.remov_end()
-lista.remove_pos(0)
+lista.add_end(3)
+lista.add_end(4)
+lista.add_end(5)
+lista.add_end(6)
+
+lista.show()
+lista.remove_pos()
 lista.show()
 print(lista.count())
 

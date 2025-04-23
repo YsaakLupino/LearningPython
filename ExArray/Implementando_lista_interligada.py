@@ -20,7 +20,7 @@ class organizada:
         self.head = dado
 
     
-    def exibir(self): # Exibir sua lista
+    def show(self): # Exibir sua lista
         node_pointer = self.head
         if self.head == None:
             raise IndexError('Lista vazia') 
@@ -100,7 +100,15 @@ class organizada:
                 cont += 1
         except AttributeError:
             return # Nada acontece caso a posição não exista!
- 
+    
+    def count(self):
+        node_pointer = self.head
+        cont = 1    
+        while node_pointer.proximo != None:
+            node_pointer = node_pointer.proximo
+            cont += 1
+        return cont
+        
 
 #Testes a se fazer:
 
@@ -116,18 +124,18 @@ lista.addend(1)
 lista.addend(2)
 lista.addend(3)
 lista.addend(4)
-lista.exibir()
+lista.show()
 lista.removeval(4)
-lista.exibir()
+lista.show()
 lista.addend(4)
 lista.addend(5)
-lista.exibir()
+lista.show()
 lista.removeval(4)
-lista.exibir()
+lista.show()
 lista.removeval(3)
-lista.exibir()
+lista.show()
 lista.removepstn(1)
-lista.exibir()
+lista.show()
 lista.addend(6)
 lista.addend(7)
 lista.addend(8)
@@ -139,12 +147,13 @@ lista.addini(3)
 lista.addini(2)
 lista.addini(1)
 lista.removepstn(12)
-lista.removepstn(-4)
-lista.exibir()
+lista.removepstn(-2)
+lista.show()
+print('Sua lista tem, atualmente,',lista.count(),'elementos!')
 
 lista2 = organizada()
 
 lista2.addini(12)
 lista2.addini(121)
 lista2.removeval(121)
-lista2.exibir()
+lista2.show()

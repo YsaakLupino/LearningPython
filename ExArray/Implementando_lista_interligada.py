@@ -103,11 +103,14 @@ class organizada:
     
     def count(self):
         node_pointer = self.head
+        if node_pointer == None:
+            return 0
         cont = 1    
         while node_pointer.proximo != None:
             node_pointer = node_pointer.proximo
             cont += 1
         return cont
+    
         
 
 #Testes a se fazer:
@@ -155,5 +158,6 @@ lista2 = organizada()
 
 lista2.addini(12)
 lista2.addini(121)
+lista2.removeval(12)
 lista2.removeval(121)
-lista2.show()
+print('Sua lista tem, atualmente,',lista2.count(),'elementos!')

@@ -1,15 +1,15 @@
-class organizada:
+class Organizada:
     def __init__(self):
         self.head = None #Head
     
-    class no:
+    class No:
         def __init__(self,atual):
             self.atual = atual
             self.proximo = None
     
     #Funções:
-    def addend(self, dado): # Adicionar nó ao final da lista
-        dado = organizada.no(dado) 
+    def add_end(self, dado): # Adicionar nó ao final da lista
+        dado = Organizada.No(dado) 
         if self.head != None:
             node_pointer = self.head
             while node_pointer.proximo != None:
@@ -30,19 +30,19 @@ class organizada:
             node_pointer = node_pointer.proximo
         print(f'{node_pointer.atual}]')
     
-    def addini(self, dado): #adicionar nó antes do head
-        dado = organizada.no(dado)
+    def add_ini(self, dado): #adicionar nó antes do head
+        dado = Organizada.No(dado)
         node_pointer = self.head
         self.head = dado
         self.head.proximo = node_pointer # não necessita de if lista vazia
         
-    def removini(self): #Remover primeiro nó
+    def remov_ini(self): #Remover primeiro nó
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head.proximo
         self.head = node_pointer
     
-    def removend(self): #Remover ultimo nó
+    def remov_end(self): #Remover ultimo nó
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head
@@ -54,7 +54,7 @@ class organizada:
             node_pointer = node_pointer.proximo
         node_pointer2.proximo = None
 
-    def removeval(self, valor): # Remover nó por seu valor atual
+    def remov_val(self, valor): # Remover nó por seu valor atual
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head
@@ -75,7 +75,7 @@ class organizada:
                 break # Simplesmente nao acontece nada caso o elemento nao exista na lista
             
     
-    def removepstn(self, pstn):
+    def remove_pos(self, pstn):
         if pstn < 0: # Caso a pstn seja menor que 0 ele remove de frente para trás!
             node_pointer = self.head
             cont = 1
@@ -125,21 +125,21 @@ Adicionar função print atraves de dunder methods
 Adicionar parametro de posição 1 2 3.. ao removini e removend
 '''  
 
-lista = organizada()
-lista.addend(1)
-lista.addend(2)
-lista.addend(2)
-lista.removend()
-lista.removend()
+lista = Organizada()
+lista.add_end(1)
+lista.add_end(2)
+lista.add_end(2)
+lista.remov_end()
+lista.remov_end()
 lista.show()
 
-lista2 = organizada()
-lista2.addini(12)
-lista2.addini(121)
-lista2.addini(12)
+lista2 = Organizada()
+lista2.add_ini(12)
+lista2.add_ini(121)
+lista2.add_ini(12)
 lista2.show()
-lista2.removeval(12)
+lista2.remov_val(12)
 lista2.show()
-lista2.removeval(12)
+lista2.remov_val(12)
 lista2.show()
 print('Sua lista tem, atualmente,',lista2.count(),'elementos!')

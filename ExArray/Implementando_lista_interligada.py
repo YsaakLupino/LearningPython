@@ -1,6 +1,7 @@
 class Organizada:
     def __init__(self):
         self.head = None #Head
+        self.len = 0
     
     class No:
         def __init__(self,atual):
@@ -15,9 +16,11 @@ class Organizada:
             while node_pointer.proximo != None:
                 node_pointer = node_pointer.proximo
             node_pointer.proximo = dado
+            self.len += 1
             return
             
         self.head = dado
+        self.len += 1
 
     
     def show(self): # Exibir sua lista
@@ -35,12 +38,14 @@ class Organizada:
         node_pointer = self.head
         self.head = dado
         self.head.proximo = node_pointer # não necessita de if lista vazia
+        self.len += 1
         
     def remov_ini(self): #Remover primeiro nó
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head.proximo
         self.head = node_pointer
+        self.len -= 1
     
     def remov_end(self): #Remover ultimo nó
         if self.head == None:
@@ -48,11 +53,13 @@ class Organizada:
         node_pointer = self.head
         if node_pointer.proximo == None:
             self.head = None
+            self.len -= 1
             return
         while node_pointer.proximo != None:
             node_pointer2 = node_pointer
             node_pointer = node_pointer.proximo
         node_pointer2.proximo = None
+        self.len -= 1
 
     def remov_val(self, valor): # Remover nó por seu valor atual
         if self.head == None:
@@ -60,19 +67,21 @@ class Organizada:
         node_pointer = self.head
         if node_pointer.atual == valor:
             self.head = node_pointer.proximo
+            self.len -= 1
             return
         node_pointer2 = node_pointer # Guardando node_pointer anterior ao do valor a ser removido para atualizar seu proximo depois
         node_pointer = node_pointer.proximo
-        while True:
-            try: # Tratando erro caso nao exista o valor na lista
+        try: # Tratando erro caso nao exista o valor na lista
+            while True:
                 if node_pointer.atual == valor:
-                    node_pointer = node_pointer.proximo
-                    node_pointer2.proximo = node_pointer
+                    node_pointer2.proximo = None
+                    self.len -= 1
                     break
                 node_pointer2 = node_pointer
                 node_pointer = node_pointer.proximo
-            except AttributeError:
-                break # Simplesmente nao acontece nada caso o elemento nao exista na lista
+                
+        except AttributeError:
+            return # Simplesmente nao acontece nada caso o elemento nao exista na lista
             
     
     def remove_pos(self, pstn):
@@ -87,33 +96,25 @@ class Organizada:
         cont = 0
         if pstn == cont: #caso o primeiro no ja o procurado
             self.head = node_pointer.proximo 
+            self.len -= 1
             return
         node_pointer2 = node_pointer
         node_pointer = node_pointer.proximo
         cont += 1
-        try: # Tratando erro caso posição nao exista! 
-            while True:
+        try: # Tratando erro caso posição nao exista!
+            while True: 
                 if pstn == cont:
-                    node_pointer = node_pointer.proximo
-                    node_pointer2.proximo = node_pointer
-                    break
+                    node_pointer2.proximo = None
+                    self.len -= 1
+                    return
                 node_pointer2 = node_pointer
                 node_pointer = node_pointer.proximo
-                cont += 1
+                cont += 1     
         except AttributeError:
             return # Nada acontece caso a posição não exista!
-    
+
     def count(self):
-        cont = 0
-        node_pointer = self.head
-        if node_pointer == None:
-            return cont
-        cont += 1    
-        while node_pointer.proximo != None:
-            node_pointer = node_pointer.proximo
-            cont += 1
-        return cont
-    
+        return self.len
         
 
 #Testes a se fazer:
@@ -129,9 +130,14 @@ lista = Organizada()
 lista.add_end(1)
 lista.add_end(2)
 lista.add_end(2)
+lista.add_end(2)
+lista.add_end(2)
+lista.add_end(2)
 lista.remov_end()
 lista.remov_end()
+lista.remove_pos(0)
 lista.show()
+print(lista.count())
 
 lista2 = Organizada()
 lista2.add_ini(12)

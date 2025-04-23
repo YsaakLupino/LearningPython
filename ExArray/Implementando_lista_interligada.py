@@ -11,90 +11,96 @@ class organizada:
     def addend(self, dado): # Adicionar nó ao final da lista
         dado = organizada.no(dado) 
         if self.head != None:
-            temp = self.head
-            while temp.proximo != None:
-                temp = temp.proximo
-            temp.proximo = dado
+            node_pointer = self.head
+            while node_pointer.proximo != None:
+                node_pointer = node_pointer.proximo
+            node_pointer.proximo = dado
             return
             
         self.head = dado
 
     
     def exibir(self): # Exibir sua lista
-        temp = self.head
+        node_pointer = self.head
         if self.head == None:
             raise IndexError('Lista vazia') 
         print('[', end='') # Parte visual para parecer uma lista de python
-        while temp.proximo != None:
-            print(f'{temp.atual}', end=', ')
-            temp = temp.proximo
-        print(f'{temp.atual}]')
+        while node_pointer.proximo != None:
+            print(f'{node_pointer.atual}', end=', ')
+            node_pointer = node_pointer.proximo
+        print(f'{node_pointer.atual}]')
     
     def addini(self, dado): #adicionar nó antes do head
         dado = organizada.no(dado)
-        temp = self.head
+        node_pointer = self.head
         self.head = dado
-        self.head.proximo = temp # não necessita de if lista vazia
+        self.head.proximo = node_pointer # não necessita de if lista vazia
         
     def removini(self): #Remover primeiro nó
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.head.proximo
-        self.head = temp
+        node_pointer = self.head.proximo
+        self.head = node_pointer
     
     def removend(self): #Remover ultimo nó
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.head
-        while temp.proximo.proximo != None:
-            temp = temp.proximo
-        print(temp.atual)
-        temp.proximo = None
+        node_pointer = self.head
+        while node_pointer.proximo.proximo != None:
+            node_pointer = node_pointer.proximo
+        print(node_pointer.atual)
+        node_pointer.proximo = None
 
     def removeval(self, valor): # Remover nó por seu valor atual
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
-        temp = self.head
+        node_pointer = self.head
         while True:
-            if temp.atual == valor:
-                self.head = temp.proximo
+            if node_pointer.atual == valor:
+                self.head = node_pointer.proximo
                 break
-            temp2 = temp # Guardando temp anterior ao do valor a ser removido para atualizar seu proximo depois
-            temp = temp.proximo
+            node_pointer2 = node_pointer # Guardando node_pointer anterior ao do valor a ser removido para atualizar seu proximo depois
+            node_pointer = node_pointer.proximo
             while True:
                 try: # Tratando erro caso nao exista o valor na lista
-                    if temp.atual == valor:
-                        temp = temp.proximo
-                        temp2.proximo = temp
+                    if node_pointer.atual == valor:
+                        node_pointer = node_pointer.proximo
+                        node_pointer2.proximo = node_pointer
                         break
-                    temp2 = temp
-                    temp = temp.proximo
+                    node_pointer2 = node_pointer
+                    node_pointer = node_pointer.proximo
                 except AttributeError:
                     break # Simplesmente nao acontece nada caso o elemento nao exista na lista
             break
     
     def removepstn(self, pstn):
-        temp = self.head
+        if pstn < 0: # Caso a pstn seja menor que 0 ele remove de frente para trás!
+            node_pointer = self.head
+            cont = 1
+            while node_pointer.proximo != None:
+                node_pointer = node_pointer.proximo
+                cont += 1
+            pstn = cont + pstn
+        node_pointer = self.head
         cont = 0
         if pstn == cont: #caso o primeiro no ja o procurado
-            self.head = temp.proximo 
+            self.head = node_pointer.proximo 
             return
-        temp2 = temp
-        temp = temp.proximo
+        node_pointer2 = node_pointer
+        node_pointer = node_pointer.proximo
         cont += 1
         try: # Tratando erro caso posição nao exista! 
             while True:
                 if pstn == cont:
-                    temp = temp.proximo
-                    temp2.proximo = temp
+                    node_pointer = node_pointer.proximo
+                    node_pointer2.proximo = node_pointer
                     break
-                temp2 = temp
-                temp = temp.proximo
+                node_pointer2 = node_pointer
+                node_pointer = node_pointer.proximo
                 cont += 1
         except AttributeError:
             return # Nada acontece caso a posição não exista!
-
-
+ 
 
 #Testes a se fazer:
 
@@ -102,7 +108,7 @@ class organizada:
 Adicionar função print atraves de dunder methods
 '''
 '''
-Adicionar parametro de posição 1 2 3.. ao removini e removendo
+Adicionar parametro de posição 1 2 3.. ao removini e removend
 '''  
 
 lista = organizada()
@@ -133,7 +139,7 @@ lista.addini(3)
 lista.addini(2)
 lista.addini(1)
 lista.removepstn(12)
-lista.removepstn(1)
+lista.removepstn(-4)
 lista.exibir()
 
 lista2 = organizada()

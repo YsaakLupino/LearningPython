@@ -46,10 +46,13 @@ class organizada:
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head
-        while node_pointer.proximo.proximo != None:
+        if node_pointer.proximo == None:
+            self.head = None
+            return
+        while node_pointer.proximo != None:
+            node_pointer2 = node_pointer
             node_pointer = node_pointer.proximo
-        print(node_pointer.atual)
-        node_pointer.proximo = None
+        node_pointer2.proximo = None
 
     def removeval(self, valor): # Remover nó por seu valor atual
         if self.head == None:
@@ -125,37 +128,12 @@ Adicionar parametro de posição 1 2 3.. ao removini e removend
 lista = organizada()
 lista.addend(1)
 lista.addend(2)
-lista.addend(3)
-lista.addend(4)
+lista.addend(2)
+lista.removend()
+lista.removend()
 lista.show()
-lista.removeval(4)
-lista.show()
-lista.addend(4)
-lista.addend(5)
-lista.show()
-lista.removeval(4)
-lista.show()
-lista.removeval(3)
-lista.show()
-lista.removepstn(1)
-lista.show()
-lista.addend(6)
-lista.addend(7)
-lista.addend(8)
-lista.addend(9)
-lista.addend(10)
-lista.removini()
-lista.addini(4)
-lista.addini(3)
-lista.addini(2)
-lista.addini(1)
-lista.removepstn(12)
-lista.removepstn(-2)
-lista.show()
-print('Sua lista tem, atualmente,',lista.count(),'elementos!')
 
 lista2 = organizada()
-
 lista2.addini(12)
 lista2.addini(121)
 lista2.removeval(12)

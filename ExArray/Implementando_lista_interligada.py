@@ -1,6 +1,6 @@
 class Organizada:
     def __init__(self):
-        self.head = None #Head
+        self.head = None
         self.len = 0
     
     class No:
@@ -8,7 +8,7 @@ class Organizada:
             self.atual = atual
             self.proximo = None
     
-    #Funções:
+    #Métodos:
     def add_end(self, dado): # Adicionar nó ao final da lista
         dado = Organizada.No(dado) 
         if self.head != None:
@@ -74,7 +74,7 @@ class Organizada:
         try: # Tratando erro caso nao exista o valor na lista
             while True:
                 if node_pointer.atual == valor:
-                    node_pointer2.proximo = None
+                    node_pointer2.proximo = node_pointer.proximo
                     self.len -= 1
                     break
                 node_pointer2 = node_pointer
@@ -89,30 +89,26 @@ class Organizada:
             raise IndexError('Lista Vazia')
         node_pointer = self.head
         cont = 0
-        if pstn < 0:
-            pstn = self.len + pstn
-        if pstn == cont: # se o primeiro ja for 
+        if pstn < 0: # se pstn for negativo (inverter caminho)
+            pstn += self.len 
+
+        if pstn == cont: # se pstn for a cabeca 
             self.head = self.head.proximo
+            self.len -= 1
             return    
-        try:
+        
+        if pstn >= self.len or pstn < 0:
+            raise IndexError('Índice fora de alcance')
+        cont += 1
+        node_pointer_ant = node_pointer
+        node_pointer = node_pointer.proximo
+        while cont < pstn:
             node_pointer_ant = node_pointer
             node_pointer = node_pointer.proximo
-        except:
-            raise IndexError('Posição não encontrada')
-        cont += 1
-        try:
-            while True:
-                if pstn == cont:
-                    node_pointer = node_pointer.proximo
-                    node_pointer_ant.proximo = node_pointer
-                    return
-                if cont > self.len:
-                    raise IndexError('Posição não encontrada')
-                node_pointer_ant = node_pointer
-                node_pointer = node_pointer.proximo
-                cont += 1
-        except:
-            raise IndexError('Posição não encontrada')
+            cont += 1
+        node_pointer_ant.proximo = node_pointer.proximo
+        self.len -= 1
+
          # se o parametro passado para pstn for negativo
         
 
@@ -131,15 +127,13 @@ Adicionar parametro de posição 1 2 3.. ao removini e removend
 '''  
 
 lista = Organizada()
+
 lista.add_end(1)
 lista.add_end(2)
 lista.add_end(3)
 lista.add_end(4)
-lista.add_end(5)
-lista.add_end(6)
-
 lista.show()
-lista.remove_pos()
+lista.remove_pos(-4)
 lista.show()
 print(lista.count())
 

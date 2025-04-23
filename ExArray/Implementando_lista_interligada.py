@@ -58,23 +58,22 @@ class organizada:
         if self.head == None:
             raise IndexError('Lista Vazia') # controle erro contra lista vazia 
         node_pointer = self.head
+        if node_pointer.atual == valor:
+            self.head = node_pointer.proximo
+            return
+        node_pointer2 = node_pointer # Guardando node_pointer anterior ao do valor a ser removido para atualizar seu proximo depois
+        node_pointer = node_pointer.proximo
         while True:
-            if node_pointer.atual == valor:
-                self.head = node_pointer.proximo
-                break
-            node_pointer2 = node_pointer # Guardando node_pointer anterior ao do valor a ser removido para atualizar seu proximo depois
-            node_pointer = node_pointer.proximo
-            while True:
-                try: # Tratando erro caso nao exista o valor na lista
-                    if node_pointer.atual == valor:
-                        node_pointer = node_pointer.proximo
-                        node_pointer2.proximo = node_pointer
-                        break
-                    node_pointer2 = node_pointer
+            try: # Tratando erro caso nao exista o valor na lista
+                if node_pointer.atual == valor:
                     node_pointer = node_pointer.proximo
-                except AttributeError:
-                    break # Simplesmente nao acontece nada caso o elemento nao exista na lista
-            break
+                    node_pointer2.proximo = node_pointer
+                    break
+                node_pointer2 = node_pointer
+                node_pointer = node_pointer.proximo
+            except AttributeError:
+                break # Simplesmente nao acontece nada caso o elemento nao exista na lista
+            
     
     def removepstn(self, pstn):
         if pstn < 0: # Caso a pstn seja menor que 0 ele remove de frente para trás!
@@ -105,10 +104,11 @@ class organizada:
             return # Nada acontece caso a posição não exista!
     
     def count(self):
+        cont = 0
         node_pointer = self.head
         if node_pointer == None:
-            return 0
-        cont = 1    
+            return cont
+        cont += 1    
         while node_pointer.proximo != None:
             node_pointer = node_pointer.proximo
             cont += 1
@@ -136,6 +136,10 @@ lista.show()
 lista2 = organizada()
 lista2.addini(12)
 lista2.addini(121)
+lista2.addini(12)
+lista2.show()
 lista2.removeval(12)
-lista2.removeval(121)
+lista2.show()
+lista2.removeval(12)
+lista2.show()
 print('Sua lista tem, atualmente,',lista2.count(),'elementos!')

@@ -1,10 +1,10 @@
 import requests
-import sys
 
 #título ano tempo diretor linguagem e premios
 
 amarelo = '\033[33m'
 reset = '\033[0m'
+lista_filmes = []
 
 class filme_buscado():
     def __init__(self,titulo,diretor,premios,lingua,tempo, ano):
@@ -14,8 +14,6 @@ class filme_buscado():
         self.lingua = lingua
         self.tempo = tempo
         self.ano = ano
-
-lista_filmes = []
 
 while True:
     busca = str(input('Qual filme ou série deseja buscar?'))

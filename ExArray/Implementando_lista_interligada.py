@@ -112,7 +112,6 @@ class Organizada:
          # se o parametro passado para pstn for negativo
         
 
-
     def count(self):
         return self.len
         

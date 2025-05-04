@@ -114,6 +114,25 @@ class Organizada:
 
     def count(self):
         return self.len
+    
+    def reverse(self):
+        temp = self.head
+        while temp.proximo.proximo != None:
+            temp = temp.proximo
+        reverse_temp = temp.proximo
+        temp.proximo = None
+        while True:
+            temp = self.head
+            while temp.proximo.proximo != None:
+                temp = temp.proximo
+            reverse_temp.proximo = temp.proximo
+            temp.proximo = None
+            
+
+        
+        
+        
+        
         
 
 #Testes a se fazer:
@@ -146,3 +165,4 @@ lista2.show()
 lista2.remov_val(12)
 lista2.show()
 print('Sua lista tem, atualmente,',lista2.count(),'elementos!')
+lista.reverse()

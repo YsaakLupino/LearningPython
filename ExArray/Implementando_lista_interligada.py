@@ -116,17 +116,29 @@ class Organizada:
         return self.len
     
     def reverse(self):
-        temp = self.head
-        while temp.proximo.proximo != None:
-            temp = temp.proximo
-        reverse_temp = temp.proximo
-        temp.proximo = None
-        while True:
-            temp = self.head
-            while temp.proximo.proximo != None:
+        temp_lista = Organizada()
+        temp_len = self.len
+        if self.len < 1:
+            raise IndexError('Lista contém somente um elemento')
+        while self.len > 1:
+            temp=self.head
+            tempant=self.head
+            while temp.proximo != None:
                 temp = temp.proximo
-            reverse_temp.proximo = temp.proximo
-            temp.proximo = None
+            while tempant.proximo.proximo != None:
+                tempant = tempant.proximo
+            temp_lista.add_end(temp.atual)
+            tempant.proximo = None
+            self.len -= 1
+        temp_lista.add_end(tempant.atual)
+        self.head = temp_lista.head
+        self.len = temp_len
+
+
+
+        
+
+
             
 
         
@@ -147,6 +159,7 @@ Adicionar parametro de posição 1 2 3.. ao removini e removend
 lista = Organizada()
 
 lista.add_end(1)
+lista.show()
 lista.add_end(2)
 lista.add_end(3)
 lista.add_end(4)
@@ -166,3 +179,6 @@ lista2.remov_val(12)
 lista2.show()
 print('Sua lista tem, atualmente,',lista2.count(),'elementos!')
 lista.reverse()
+
+lista.show()
+print(lista.count())

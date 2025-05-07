@@ -52,13 +52,3 @@ class Exercicios():
                     sequence_lenght = sequence_lenght_temp
         print(f'A maior sequencia da lista tem o tamanho de {sequence_lenght} números')
 
-
-"""
-eu compreendi que o melhor jeito nao era percorrer ele varias vezes mas nao
-consegui fazer sozinho, eu peguei a ideia da solução no video mas a codagem eu desenvolvi
-"""
-
-"""
-Como desafio ficam os outros 2 problemas
- do vídeo https://www.youtube.com/watch?v=sjqB70KIfog
-"""

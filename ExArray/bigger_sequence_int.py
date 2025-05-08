@@ -24,17 +24,16 @@ class Exercicios():
         """Setter classe Exercícios."""
         pass
 
-    def exercício_1(self, nums_list:list[int]) -> int:
+    def exercicio_1(self, nums_list:list[int]) -> int:
         """Realiza execução do exercício 1.
 
-        Printa o resultado do exercicio
+        Printa o resultado do exercicio 1
 
         Args:
             nums_list (list[int]): Lista a analisar
         
         Returns:   
-            tudo
-            none      
+            Self (Self): All the methods and atributtes to recursive and continuos calls
         """
         nums = nums_list
         nums_dict = {}
@@ -50,5 +49,43 @@ class Exercicios():
                     num+=1
                 if sequence_lenght_temp >= sequence_lenght:
                     sequence_lenght = sequence_lenght_temp
-        print(f'A maior sequencia da lista tem o tamanho de {sequence_lenght} números')
+        print(f'A maior sequencia da lista tem o tamanho de {sequence_lenght} números!')
+        return self
+    
+    def exercicio_2(self, nums_list:list[int], k:int) -> int:
+        """Realiza execução do exercício 2.
+        
+        Printa o resultado do exercicio 2
 
+        Args:
+            nums_list (list[int]): Lista a analisar
+            k (int): k primeiros elementos mais frequentes
+        
+        Returns:   
+            Self (Self): All the methods and atributtes to recursive and continuos calls"""
+        dic = {}
+        lista_ordenada = ['a']
+        for num in nums_list:
+            if num in dic:
+                dic[num] += 1
+                continue
+            dic[num] = 1
+        temp_num = 0
+        for num in dic:
+            if dic[num] > temp_num:
+                temp_num = dic[num]
+                lista_ordenada.insert(0,num)
+                continue
+            if dic[num] == temp_num:
+                lista_ordenada.insert(1,num)
+            if dic[num] < temp_num:
+                lista_ordenada.insert(-1,num)
+        lista_ordenada.remove('a')
+        return [lista_ordenada[i] for i in range(k)]
+            
+
+
+     
+
+
+print(Exercicios().exercicio_2(k= 3, nums_list=[1,2,3,1,2,2,1,5,5,5]))

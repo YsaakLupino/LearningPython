@@ -15,3 +15,4 @@ for n in range(10):
 
 
 print(vetor_num[::-1])
+

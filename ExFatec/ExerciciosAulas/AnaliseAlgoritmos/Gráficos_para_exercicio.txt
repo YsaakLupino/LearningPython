@@ -1,0 +1,17 @@
+GRAFICO 1:
+ TEMPO X TAMANHO DA LISTA (MOSTRA A CURVA DE CRESCIMENTO DE TEMPO DE EXECUÇÃO COM AMBOS ALGORTIMOS)
+
+GRAFICO 2:
+ INTERAÇÕES X TAMANHO DA LISTA (MOSTRA A CURVA DE ANÁLISE BIG O
+
+GRÁFICO 3:
+ POSIÇÃO VALOR X TEMPO (MOSTRA EM QUE MOMENTO UM ALGORITMO PASSA A SER MELHOR QUE O OUTRO
+
+TABELA
+posição       linear    binária    vantagem
+1             0.3 µs    5.5 µs     linear 18×
+10            0.5 µs    5.5 µs     linear 11×
+100           2 µs      5.5 µs     linear 2.7×
+1000          20 µs     5.5 µs     binária 3.6×
+...
+

@@ -1,47 +1,11 @@
-'''
-Documento designado a estudar diferença entre busca linear e pesquisa binaria
-e comparando uso tempo e análise Big O. 
-'''
-import numpy as np
+from time import time
 
-class Vetor():
-    def __init__(self,vetor):
-        '''
-        classe para criar vetor garantindo que todos os objetos contidos nele tenha o mesmo tipo
-        '''
-        self.vetor = vetor
-        self.tipo = None
+listt = list(range(1,1_000_001)) #1 to 1 million test list 
+print(listt)
 
-
-    def _define_type(self, vetor) -> None:
-        '''
-        Define o tipo do array
-        '''
-        
-
-
-
-class Search():
+def binary_search(vetor:list[int],value:int) -> bool|int:
     '''
-    Classe que representa o que toda busca tem que ter
+    manual implementation of a binary search for studies
     '''
-    def __init__(self):
-        pass
-
-    def _type_of_search(self,type):
-        '''
-        define o tipo de busca a fazer
-        '''
-        if type = 'binary':
-            
-            
-
-    def _isOrdered(self, vetor) -> bool:
-        pass
-
-    class BinarySearch():
-        def __init__(self):
-            pass
-            
-
-
+    minor = 0
+    upper = 

@@ -64,7 +64,7 @@ listt_position =[1,10,50,100,500,1000] #Teste de busca em varias posições da l
 
 
 #funções de bbusca
-def binary_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
+def binary_search(vetor:list[int],value:int) -> tuple[int|str,int]:
     '''
     manual implementation of a binary search for studies
     '''
@@ -87,14 +87,14 @@ def binary_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
             upper = middle -1
         middle = (upper + down) // 2
 
-    return (value,"Valor não existe no vetor",interations_count)
+    return ("Valor não existe no vetor",interations_count)
 
-def linear_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
+def linear_search(vetor:list[int],value:int) -> tuple[int|str,int]:
     interations_count = 0
     for n,item in enumerate(vetor,0):
         interations_count += 1
         if value == item:
-            return (vetor[n],n,interations_count)
+            return (n,interations_count)
     return ("Valor não existe no vetor",interations_count)
     
 #========================================================================

@@ -199,22 +199,22 @@ if __name__ == "__main__":
 
     # ================= TABELA DE COMPARAÇÃO POR POSIÇÃO =================
 
-    tamanho_tabela = 10_000
-    vetor_tabela = list(range(1, tamanho_tabela + 1))
+    listt_len = 10_000
+    listt = list(range(1, listt_len + 1))
 
     dados_tabela = []
 
     for posicao in listt_position:
 
-        valor_busca = vetor_tabela[posicao - 1]
+        search_value = listt[posicao - 1]
 
         tempo_linear = timeit.timeit(
-            lambda: linear_search(vetor_tabela, valor_busca),
+            lambda: linear_search(listt, search_value),
             number=10_000
         ) / 10_000
 
         tempo_binario = timeit.timeit(
-            lambda: binary_search(vetor_tabela, valor_busca),
+            lambda: binary_search(listt, search_value),
             number=10_000
         ) / 10_000
 

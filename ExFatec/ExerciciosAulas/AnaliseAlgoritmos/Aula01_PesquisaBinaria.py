@@ -1,4 +1,46 @@
 
+'''
+Farei aqui uma breve análise do algoritmo de busca linear contra busca binária
+
+Sempre será buscado o último item da lista, que será o pior caso para ambos os 
+algoritmos, para testar com efetividade
+
+Além disso, para cálculo de tempo, foi classe timeit da biblioteca timeit
+que, recebe uma função como parametro e um numero inteiro, ela roda aquela função 
+o numero de vezes que voce passou nesse inteiro e retorna o tempo total de execução.
+Assim podemos calcular a média dessas execuções e chegar a um valor mais preciso, do que
+apenas testar a função uma unica vez.
+
+Digo ainda, que, para fins de teste, admitisse que os vetores já estão ordenados
+e contem apenas um tipo de dados ( Números inteiros) 
+
+A analise englobará 2 graficos e uma tabela
+
+GRÁFICO 1 
+TEMPO X TAMANHO DA LISTA (MOSTRARÁ A CURVA DE CRESCIMENTO DE TEMPO DE EXECUÇÃO COM AMBOS ALGORTIMOS)
+
+GRÁFICO 2 
+INTERAÇÕES X TAMANHO DA LISTA (MOSTRA A CURVA EM RELACIONADA A NOTAÇÃO BIG O)
+
+** Para os gráficos 1 e 2 o eixo x terá 7 tamanhos diferentes de lista, começando
+em 10 elementos e terminando em 10 milhões de elementos
+
+
+Tabela de comparação por posição 
+(MOSTRA EM QUE MOMENTO UM ALGORITMO PASSA A SER MELHOR QUE O OUTRO
+	Para esta tabela o tamnho da lista será fixo em 10000 elementos
+    O intuito aqui é visualizar em que momento um algoritmo passa a
+    ter vantagem sobre outro além de mensurar essa vantagem.
+
+Formato da tabela:
+posição       linear    binária    vantagem
+1             0.3 ms    0.5 ms     linear 18×
+10            0.5 ms    1.5 ms     linear 11×
+100           2 ms      1.75 ms     linear 2.7×
+1000          20 ms     2.5 ms     binária 3.6×
+'''
+
+
 import timeit
 
 
@@ -31,7 +73,7 @@ def binary_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
     middle = (upper + down) // 2
 
     interations_count = 0
-    # vetor = sorted(vetor)
+    
 
     while down <= upper:
         interations_count += 1

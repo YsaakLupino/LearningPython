@@ -52,10 +52,10 @@ def get_last_value(vetor:list[int]) -> int:
     '''
     return vetor[-1]
 
-listt_len = {10,100,1000,10000,100000,
-            1_000_000,10_000_000} #Teste com varios tamanhos de lista
+listt_len = [10,100,1000,10000,100000,
+            1_000_000,10_000_000] #Teste com varios tamanhos de lista
 
-listt_position = {1,10,50,100,500,1000}#Teste de busca em varias posições da lista
+listt_position =[1,10,50,100,500,1000] #Teste de busca em varias posições da lista
 
 
 

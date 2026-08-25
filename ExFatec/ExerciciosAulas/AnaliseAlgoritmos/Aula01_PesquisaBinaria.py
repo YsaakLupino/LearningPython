@@ -2,9 +2,21 @@
 import timeit
 
 
-#SEARCHING CONFIGURATIONS
-listt = list(range(1,1_000_000)) #1 to 1 million test list 
-search_value = 100
+#BENCHMARK SEARCHING CONFIGURATIONS-----------------------------------------
+def get_last_value(vetor:list[int]) -> int:
+    '''
+    Função para pegar o útltimo valor da lista, 
+    Assim testando os algoritmos no pior dos casos!
+    '''
+    return vetor[-1]
+
+listt_len = [10,100,1000,10000,100000,
+            1_000_000,10_000_000] #Teste com varios tamanhos de lista
+
+listt_position = [1,10,50,100,500,1000]#Teste de busca em varias posições da lista
+
+
+
 #-----------------------------------------------------------
 
 

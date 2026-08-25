@@ -40,7 +40,7 @@ posição       linear    binária    vantagem
 1000          20 ms     2.5 ms     binária 3.6×
 '''
 
-
+#=================CÓDIGO DE BUSCA LINEAR E BINÁRIA=========================
 import timeit
 
 
@@ -52,10 +52,11 @@ def get_last_value(vetor:list[int]) -> int:
     '''
     return vetor[-1]
 
-listt_len = [10,100,1000,10000,100000,
-            1_000_000,10_000_000] #Teste com varios tamanhos de lista
+listt_len = {10,100,1000,10000,100000,
+            1_000_000,10_000_000} #Teste com varios tamanhos de lista
 
-listt_position = [1,10,50,100,500,1000]#Teste de busca em varias posições da lista
+listt_position = {1,10,50,100,500,1000}#Teste de busca em varias posições da lista
+
 
 
 
@@ -78,7 +79,7 @@ def binary_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
     while down <= upper:
         interations_count += 1
         if value == vetor[middle]:
-            return (vetor[middle], middle,interations_count)
+            return (middle,interations_count)
         
         elif value > vetor[middle]:
             down = middle + 1
@@ -94,20 +95,23 @@ def linear_search(vetor:list[int],value:int) -> tuple[int,int|str,int]:
         interations_count += 1
         if value == item:
             return (vetor[n],n,interations_count)
-    return (value,"Valor não existe no vetor",interations_count)
+    return ("Valor não existe no vetor",interations_count)
     
 #========================================================================
 
 if __name__ == "__main__":
+
+
+    for tamanho in 
     tempo_binary = timeit.timeit(
         lambda: binary_search(listt, search_value),
         number=10
-    )
+    )/10
     tempo_linear = timeit.timeit(
         lambda: linear_search(listt, search_value),
         number=10
-    )
+    )/10
 
-    print(f"Tempo médio: {(tempo_binary / 10) * 1_000_000:.3f} µs")
-    print(f"Tempo médio: {(tempo_linear / 10) * 1_000_000:.3f} µs")
+    print(f"Tempo médio: {(tempo_binary) * 1_000_000:.3f} µs")
+    print(f"Tempo médio: {(tempo_linear) * 1_000_000:.3f} µs")
 

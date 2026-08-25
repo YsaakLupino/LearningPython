@@ -1,3 +1,3 @@
-lista = [1,2,3,4]
+# Data for plotting
+import numpy as np
 
-print(len(lista))

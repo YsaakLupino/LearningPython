@@ -59,6 +59,14 @@ listt_position =[1,10,50,100,500,1000] #Teste de busca em varias posições da l
 
 
 
+def get_interations(vetor:list[int],value:int) -> tuple[int,int]:
+    '''
+    Função para pegar o numero de interações quando busca x valor em y vetor
+    para cada um dos algoritmos
+    '''
+    iter_binary = binary_search(vetor,value)[1]
+    iter_linear = linear_search(vetor,value)[1]
+    return (iter_linear,iter_binary)
 
 #-----------------------------------------------------------
 

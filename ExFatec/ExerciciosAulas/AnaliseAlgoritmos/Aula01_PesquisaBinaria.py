@@ -108,18 +108,134 @@ def linear_search(vetor:list[int],value:int) -> tuple[int|str,int]:
 #========================================================================
 
 if __name__ == "__main__":
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    dict_len_x_Time_and_iter = {}
+    for tamanho in listt_len:
+
+        dict_len_x_Time_and_iter[tamanho] = {}
+        listt = [i for i in range(1,tamanho+1)]
+        search_value = get_last_value(listt)
+
+        tempo_binary = timeit.timeit(
+            lambda: binary_search(listt, search_value),
+            number=10
+        )/10
+        tempo_linear = timeit.timeit(
+            lambda: linear_search(listt, search_value),
+            number=10
+        )/10
+        iter_tuple = get_interations(listt,search_value)
+
+        dict_len_x_Time_and_iter[tamanho]['Tempo linear'] = tempo_linear * 1000
+        dict_len_x_Time_and_iter[tamanho]['Tempo binário'] = tempo_binary * 1000
+        dict_len_x_Time_and_iter[tamanho]['Interações binário'] = iter_tuple[1]
+        dict_len_x_Time_and_iter[tamanho]['interações linear'] = iter_tuple[0]
+
+    lista_tempo_linear = [y['Tempo linear'] for y in dict_len_x_Time_and_iter.values()]
+    lista_tempo_bin = [y['Tempo binário'] for y in dict_len_x_Time_and_iter.values() ]
+    lista_iter_linear = [y['interações linear'] for y in dict_len_x_Time_and_iter.values()]
+    lista_iter_bin = [y['Interações binário'] for y in dict_len_x_Time_and_iter.values() ]
+
+    listt_len = list(dict_len_x_Time_and_iter.keys())
+
+    #Gráfico 1 ============================
+    plt.figure(figsize=(10, 6))
+    plt.plot(listt_len,lista_tempo_bin,label="Busca binária")
+    plt.plot(listt_len,lista_tempo_linear,label="Busca linear")
+
+    plt.title("Tempo de execução × Tamanho da lista")
+    plt.xlabel("Tamanho da lista")
+    plt.ylabel("Tempo médio (ms)")
+
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.xscale("log")
+    plt.xticks(
+    listt_len,
+    ["10", "100", "1K", "10K", "100K", "1M", "10M"]
+    )
+
+    #Gráfico 2 ============================
+        
+    plt.figure(figsize=(10, 6))
+
+    plt.plot(
+        listt_len,
+        lista_iter_linear,
+        marker="o",
+        label="Busca linear"
+    )
+
+    plt.plot(
+        listt_len,
+        lista_iter_bin,
+        marker="o",
+        label="Busca binária"
+    )
+
+    plt.title("Iterações × Tamanho da lista")
+    plt.xlabel("Tamanho da lista")
+    plt.ylabel("Número de iterações")
+
+    plt.xscale("log")
+    plt.yscale("log")
+
+    plt.yticks(
+            listt_len,
+            ["10", "100", "1K", "10K", "100K", "1M", "10M"]
+        )
+    
+    plt.xticks(
+        listt_len,
+        ["10", "100", "1K", "10K", "100K", "1M", "10M"]
+    )
+
+    plt.legend()
+    plt.grid(alpha=0.3)
+
+    plt.show()
+
+    # ================= TABELA DE COMPARAÇÃO POR POSIÇÃO =================
+
+    tamanho_tabela = 10_000
+    vetor_tabela = list(range(1, tamanho_tabela + 1))
+
+    dados_tabela = []
+
+    for posicao in listt_position:
+
+        valor_busca = vetor_tabela[posicao - 1]
+
+        tempo_linear = timeit.timeit(
+            lambda: linear_search(vetor_tabela, valor_busca),
+            number=10_000
+        ) / 10_000
+
+        tempo_binario = timeit.timeit(
+            lambda: binary_search(vetor_tabela, valor_busca),
+            number=10_000
+        ) / 10_000
+
+        # converter segundos para milissegundos
+        tempo_linear *= 1000
+        tempo_binario *= 1000
+
+        # descobrir qual foi mais rápido e quantas vezes
+        if tempo_linear < tempo_binario:
+            vantagem = f"Linear {tempo_binario / tempo_linear:.2f}×"
+        else:
+            vantagem = f"Binária {tempo_linear / tempo_binario:.2f}×"
+
+        dados_tabela.append({
+            "Posição": posicao,
+            "Linear (ms)": tempo_linear,
+            "Binária (ms)": tempo_binario,
+            "Vantagem": vantagem
+        })
 
 
-    for tamanho in 
-    tempo_binary = timeit.timeit(
-        lambda: binary_search(listt, search_value),
-        number=10
-    )/10
-    tempo_linear = timeit.timeit(
-        lambda: linear_search(listt, search_value),
-        number=10
-    )/10
+    df = pd.DataFrame(dados_tabela)
 
-    print(f"Tempo médio: {(tempo_binary) * 1_000_000:.3f} µs")
-    print(f"Tempo médio: {(tempo_linear) * 1_000_000:.3f} µs")
-
+    print(df)
